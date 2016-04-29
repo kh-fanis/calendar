@@ -2,8 +2,6 @@ source 'https://rubygems.org'
 
 # For user authorization
 gem 'devise'
-# For deniding access if user not signed in or having no permissions
-gem 'cancancan'
 
 # Testing Freameworke
 gem 'rspec-rails', group: [:development, :test]
