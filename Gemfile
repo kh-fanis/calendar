@@ -1,5 +1,12 @@
 source 'https://rubygems.org'
 
+# For user authorization
+gem 'devise'
+# For deniding access if user not signed in or having no permissions
+gem 'cancancan'
+
+# Testing Freameworke
+gem 'rspec-rails', group: [:development, :test]
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.5'
