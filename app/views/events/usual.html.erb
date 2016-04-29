@@ -1,8 +1,16 @@
-<%= link_to 'Calendar', events_path %>
-<%= link_to 'Usual', events_path(usual: true) %>
+<%= render 'index_nav_menu' %>
 
-<div id="events">
+<h3 class="text-center">Events</h3>
+
+<div class="row text-center">
   <% @events.each do |event| %>
-    <p><%= link_to ("#{event.name}") %> (@<%= event.user.email %>) - <%= event.date %> - <%= event.description %></p>
+  <div class="col-sm-4">
+    <div class="thumbnail">
+      <p><strong><%= event.name %></strong></p>
+      <p>(<%= event.user.email %>)</p>
+      <p><%= event.date.strftime("%B %-d, %Y") %></p>
+      <%= link_to 'View', event, class: 'btn' %>
+    </div>
+  </div>
   <% end %>
 </div>

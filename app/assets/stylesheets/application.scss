@@ -13,3 +13,32 @@
  *= require_tree .
  *= require_self
  */
+
+@import "bootstrap-sprockets";
+@import "bootstrap";
+@import 'bootstrap-datepicker3';
+
+
+body {
+  font: 400 15px/1.8 Lato, sans-serif;
+  color: #777;
+}
+
+.btn {
+  padding: 10px 20px;
+  background-color: #333;
+  color: #f1f1f1;
+  border-radius: 0;
+  transition: .2s;
+
+  &:hover, &:focus {
+    border: 1px solid #333;
+    background-color: #fff;
+    color: #000;
+  }
+}
+
+.today {
+  background-color: #AAA;
+  color: #fff;
+}

@@ -1,14 +1,18 @@
 <%= form_for @event do |f| %>
-  <div class="field">
-    title: <%= f.text_field :name %>
+  <div class="col-sm-12 form-group">
+    <%= f.text_field :name, class: 'form-control', placeholder: 'Name' %>
   </div>
-  <div class="field">
-    date: <%= f.date_field :date %>
+
+  <div class="col-sm-12 form-group">
+    <%= f.text_field :date, value: @event.date.strftime("%m/%d/%Y"), data: { provide: 'datepicker' }, class: 'form-control', placeholder: Date.today %>
   </div>
-  <div class="field">
-    description: <%= f.text_field :description %>
+
+  <div class="col-sm-12 form-group">
+    <%= f.text_area :description, class: 'form-control', placeholder: 'Description' %>
   </div>
+
   <div class="submit">
-    <%= f.submit %>
+    <%= f.submit class: 'btn' %>
+    <%= link_to 'Back', :back, class: 'btn' %>
   </div>
 <% end %>

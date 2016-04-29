@@ -1,8 +1,10 @@
-<h1><%= @event.name %>(<%= @event.date %>)</h1>
+<h1 class="text-center"><%= @event.name %></h1>
+<p class="text-center text-muted"><%= @event.date %></p>
+
 <p><%= @event.description %></p>
 
-<%= link_to 'Back', events_path(date: @event.date) %>
+<%= link_to 'Back', events_path(date: @event.date), class: 'btn' %>
 <% if user_signed_in? and current_user == @event.user %>
-  <%= link_to 'Edit', edit_event_path(@event) %>
-  <%= link_to 'Delete', @event, method: :delete, data: { confirm: 'Are you sure?' } %>
+  <%= link_to 'Edit', edit_event_path(@event), class: 'btn' %>
+  <%= link_to 'Delete', @event, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn' %>
 <% end %>

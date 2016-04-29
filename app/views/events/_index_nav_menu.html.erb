@@ -1,0 +1,18 @@
+<div class="list-group">
+  <%= link_to 'Calendar View',  events_path,                           class: 'list-group-item' %>
+  <%= link_to 'Usual View',     events_path(usual: true),              class: 'list-group-item' %>
+
+  <% if user_signed_in? %>
+    <% if params[:mine] %>
+      <%= link_to 'Show All Events', events_path(params[:usual].nil? ? Hash.new : { usual: true }), class: 'list-group-item' %>
+    <% else %>
+      <%= link_to 'Show Just My Events', events_path(params[:usual].nil? ? { mine: true }  : { mine: true, usual: true }), class: 'list-group-item' %>
+    <% end %>
+
+    <%= link_to '+ New Event', new_event_path, class: 'list-group-item' %>
+  <% end %>
+</ul>
+
+<% if params[:mine] %>
+  <p>Shown just your events!</p>
+<% end %>

@@ -5,20 +5,28 @@
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+
+  <link href="http://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
 </head>
 <body>
 
-<p class="notice"><%= notice %></p>
-<p class="alert"><%= alert %></p>
+<!-- NavBar -->
+<%= render 'parts/nav' %>
 
-<% if user_signed_in? %>
-  <%= link_to 'Log out', destroy_user_session_path, method: :delete %>
-<% else %>
-  <%= link_to 'Sign In', new_user_session_path %>
-  <%= link_to 'Sign Up', new_user_registration_path %>
-<% end %><br>
+<div id="tour" class="bg-1">
+  <div class="container">
 
-<%= yield %>
+    <% unless notice.nil? %>
+      <p class="notice text-danger"><%= notice %></p>
+    <% end %>
+    <% unless alert.nil? %>
+      <p class="alert text-danger"><%= alert %></p>
+    <% end %>
+
+    <%= yield %>
+
+  </div>
+</div>
 
 </body>
 </html>
