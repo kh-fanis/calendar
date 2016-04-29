@@ -1,5 +1,8 @@
 source 'https://rubygems.org'
 
+# Calendar builder
+gem "watu_table_builder", :require => "table_builder"
+
 # For user authorization
 gem 'devise'
 

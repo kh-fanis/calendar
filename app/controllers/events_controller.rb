@@ -1,8 +1,12 @@
 class EventsController < ApplicationController
-  before_action :set_event, only: [:show, :edit, :update, :destroy]
+  before_action :denide_access_if_user_unsigned_in,        only: [:update, :destroy, :edit, :new, :create]
+  before_action :set_event,                                only: [:update, :destroy, :edit, :show]
+  before_action :denide_access_if_user_has_no_permissions, only: [:update, :destroy, :edit]
 
   def index
-    @events = Event.all
+    @events = Event.all.order(:date)
+    @date = params[:date].nil? ? Date.today : Date.strptime(params[:date], '%Y-%m')
+    render :usual unless params[:usual].nil?
   end
 
   def show
@@ -20,7 +24,7 @@ class EventsController < ApplicationController
     if @event.valid?
       redirect_to @event, notice: 'Successfully created!'
     else
-      redirect_to new_event_path(@event), notice: 'There are errors!'
+      redirect_to new_event_path(event: @event), notice: 'There are errors!'
     end
   end
 
@@ -44,6 +48,18 @@ private
   end
 
   def event_params
-    params.require(:event).permit(:name, :date, :description).merge(user: current_user) if params[:name]
+    params.require(:event).permit(:name, :date, :description).merge(user: current_user).merge(date: Date.parse(params[:event][:date])) if params[:event]
+  end
+
+  def denide_access_if_user_unsigned_in
+    denide_access unless user_signed_in?
+  end
+
+  def denide_access_if_user_has_no_permissions
+    denide_access unless @event.user == current_user
+  end
+
+  def denide_access
+    redirect_to root_path, notice: 'Access Denided'
   end
 end
