@@ -15,4 +15,11 @@
 //= require turbolinks
 //= require bootstrap-sprockets
 //= require bootstrap-datepicker
+//= require bootstrap-wysihtml5
+//= require bootstrap-wysihtml5/locales/ru-RU
 //= require_tree .
+
+
+$(document).ready(function(){
+  $('.wysihtml5').wysihtml5({'toolbar': { 'blockquote': false, 'html': true, 'color': true }})
+});

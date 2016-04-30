@@ -14,5 +14,9 @@
 </ul>
 
 <% if params[:mine] %>
-  <p>Shown just your events!</p>
+  <p class="text-info">Shown just your events!</p>
+<% end %>
+
+<% unless user_signed_in? %>
+  <p class="text-info">You need to sign in to add events!</p>
 <% end %>

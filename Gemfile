@@ -3,6 +3,8 @@ source 'https://rubygems.org'
 # For Beautiful design
 gem 'bootstrap-sass'
 gem 'bootstrap-datepicker-rails'
+# Good online text editor
+gem 'bootstrap-wysihtml5-rails'
 
 # Calendar builder
 gem "watu_table_builder", :require => "table_builder"
