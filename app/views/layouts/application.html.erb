@@ -16,12 +16,7 @@
 <div id="tour" class="bg-1">
   <div class="container">
 
-    <% unless notice.nil? %>
-      <p class="notice text-danger"><%= notice %></p>
-    <% end %>
-    <% unless alert.nil? %>
-      <p class="alert text-danger"><%= alert %></p>
-    <% end %>
+    <%= render 'parts/notifications' %>
 
     <%= yield %>
 
