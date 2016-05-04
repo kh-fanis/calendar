@@ -4,16 +4,19 @@ class EventsController < ApplicationController
   before_action :denide_access_if_user_has_no_permissions, only: [:update, :destroy, :edit]
 
   def index
-    if params[:mine].nil?
-      @events = Event.all.order(:date)
-    else
+    if params[:mine] and user_signed_in?
       @events = current_user.events
+    else
+      @events = Event.all.order(:date)
     end
-    @date = params[:date].nil? ? Date.today : Date.strptime(params[:date], '%Y-%m')
-    render :usual unless params[:usual].nil?
+
+    @date = EventService.parse_date(params[:date])
+
+    render :usual if params[:usual]
   end
 
   def show
+    @event.user = User.new email: 'deleted account' if @event.user.nil?
   end
 
   def new
@@ -53,7 +56,7 @@ private
   end
 
   def event_params
-    params.require(:event).permit(:name, :date, :description).merge(user: current_user).merge(date: Date.strptime(params[:event][:date], '%m/%d/%Y')) if params[:event]
+    params[:event] ? EventService.parse_params(params, current_user) : Hash.new
   end
 
   def denide_access_if_user_unsigned_in
