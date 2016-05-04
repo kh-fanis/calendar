@@ -1,5 +1,10 @@
 source 'https://rubygems.org'
 
+# Heroku supporting
+# => Setting db as Postgres
+gem 'pg', group: :production
+gem 'rails_12factor', group: :production
+
 # For Beautiful design
 gem 'bootstrap-sass'
 gem 'bootstrap-datepicker-rails'
