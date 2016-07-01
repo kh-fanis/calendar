@@ -8,11 +8,12 @@ module EventsHelper
   end
 
   def events
-    if params[:mine]
-      current_user.events
-    else
-      Event.all
-    end
+    @all_events ||=
+      if params[:mine]
+        current_user.events
+      else
+        Event.all
+      end
   end
 
   def get_events_for date
@@ -29,13 +30,13 @@ module EventsHelper
   end
 
   def everyday_duplicating
-    @everyday_d ||= Event.where(occurance: :d)
+    @everyday_d ||= events.where(occurance: :d)
   end
 
   def everyweek_duplicating
     if @everyweek_d.nil?
       @everyweek_d = []
-      Event.where(occurance: :w)
+      events.where(occurance: :w)
         .map { |e|
           @everyweek_d[e.date.wday] ||= []
           @everyweek_d[e.date.wday] << e
@@ -47,7 +48,7 @@ module EventsHelper
   def everymonth_duplicating
     if @everymonth_d.nil?
       @everymonth_d = []
-      Event.where(occurance: :m)
+      events.where(occurance: :m)
         .map { |e|
           @everymonth_d[e.date.day] ||= []
           @everymonth_d[e.date.day] << e
@@ -59,7 +60,7 @@ module EventsHelper
   def everyyear_duplicating
     if @everyyear_d.nil?
       @everyyear_d = []
-      Event.where(occurance: :y)
+      events.where(occurance: :y)
         .map { |e|
           @everyyear_d[e.date.year] ||= []
           @everyyear_d[e.date.year][e.date.month] ||= []
