@@ -47,6 +47,10 @@ module ApplicationHelper
   #################################################
 
   def messages_title_for_link
-    not current_user.recived_messages.last.nil? and current_user.recived_messages.last.created_at > current_user.last_seen_messages ? 'Messages (+)' : 'Messages'
+    if not current_user.recived_messages.last.nil? and current_user.recived_messages.last.created_at > current_user.last_seen_messages
+      'Messages (+)'
+    else
+      'Messages'
+    end
   end
 end

@@ -6,7 +6,7 @@ describe ApplicationHelper, type: :helper do
     let(:sign_up_link) { '<li><a href="/users/sign_up">Sign Up</a></li>' }
 
     let(:messages_path_link_with_new)    { '<li><a href="/messages">Messages (+)</a></li>' }
-    let(:messages_path_link_with_no_new) { '<li><a href="/messages">/messages</a></li>' }
+    let(:messages_path_link_with_no_new) { '<li><a href="/messages">Messages</a></li>' }
     let(:users_path_link)                { '<li><a href="/users">Users</a></li>' }
     let(:settings_link)                  { '<li><a href="/users/edit">Settings</a></li>' }
     let(:sign_out_link)                  { '<li><a rel="nofollow" data-method="delete" href="/users/sign_out">Log Out</a></li>' }
