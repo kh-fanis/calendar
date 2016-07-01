@@ -1,0 +1,8 @@
+<% @users.each do |user| %>
+  <p>
+    <%= "#{user.full_name} - #{user.email}" %>
+    <% unless user == current_user %>
+      - <%= link_to 'Send Message', new_message_path(reciver: user.id) %>
+    <% end %>
+  </p>
+<% end %>

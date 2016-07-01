@@ -6,6 +6,8 @@ class CreateEvents < ActiveRecord::Migration
       t.string     :description, null: false, default: ''
       t.references :user,        null: false
 
+      t.string     :occurance,   null: false
+
       t.timestamps null: false
     end
   end

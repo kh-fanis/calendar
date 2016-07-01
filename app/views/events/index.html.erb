@@ -15,9 +15,7 @@
     <% calendar.day(day_method: :date) do |date, events| %>
       <p class="text-center"><%= date.day %></p>
       <div class="text-center">
-        <% events.each do |event| %>
-          <p><%= link_to event.name, event %></p>
-        <% end %>
+        <%= get_events_for date %>
       </div>
     <% end %>
   <% end %>

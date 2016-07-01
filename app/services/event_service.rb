@@ -11,10 +11,23 @@ module EventService
 
   # inned in a create and update actions of events controller to parse date and save to db
   def self.parse_params params, current_user
-    set_up_params(params.require(:event).permit(:name, :date, :description), current_user)
+    set_up_params(params.require(:event).permit(:name, :date, :description, :occurance), current_user)
   end
 
   def self.set_up_params params, current_user
     params.merge(user: current_user).merge(date: Date.strptime(params[:date], @@DATE_IN_STYLE))
+  end
+
+  def self.repeating str
+    case str
+      when 'd'
+        'Every Day'
+      when 'w'
+        'Every Week'
+      when 'm'
+        'Every Month'
+      when 'y'
+        'Every Year'
+    end
   end
 end

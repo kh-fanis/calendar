@@ -4,15 +4,16 @@ class EventsController < ApplicationController
   before_action :denide_access_if_user_has_no_permissions, only: [:update, :destroy, :edit]
 
   def index
-    if params[:mine] and user_signed_in?
-      @events = current_user.events
-    else
-      @events = Event.all.order(:date)
+    if params[:usual]
+      if params[:mine] and user_signed_in?
+        @events = current_user.events
+      else
+        @events = Event.all.order(:date)
+      end
+      render :usual
     end
 
     @date = EventService.parse_date(params[:date])
-
-    render :usual if params[:usual]
   end
 
   def show

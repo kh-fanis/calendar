@@ -11,6 +11,14 @@
     <%= f.text_area :description, class: 'form-control wysihtml5', placeholder: 'Description' %>
   </div>
 
+  <div class="col-sm-12 form-group">
+    <p>Повторение:</p>
+    <%= f.radio_button :occurance, :d, checked: true %> Каждый день<br>
+    <%= f.radio_button :occurance, :w %> Каждую неделю<br>
+    <%= f.radio_button :occurance, :m %> Каждый месяц<br>
+    <%= f.radio_button :occurance, :y %> Каждый год
+  </div>
+
   <div class="submit">
     <%= f.submit class: 'btn' %>
     <%= link_to 'Back', :back, class: 'btn' %>

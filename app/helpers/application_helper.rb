@@ -16,7 +16,12 @@ module ApplicationHelper
   end
 
   def user_setting_menu_items
-    build_menu_items(*[['Settings', edit_user_registration_path], ['Log Out', destroy_user_session_path, method: :delete]])
+    build_menu_items(*[
+      [messages_title_for_link, messages_path],
+      ['Users', users_path],
+      ['Settings', edit_user_registration_path],
+      ['Log Out', destroy_user_session_path, method: :delete]
+    ])
   end
   # navbar
   #################################################
@@ -40,4 +45,8 @@ module ApplicationHelper
   end
   # Builders
   #################################################
+
+  def messages_title_for_link
+    not current_user.recived_messages.last.nil? and current_user.recived_messages.last.created_at > current_user.last_seen_messages ? 'Messages (+)' : 'Messages'
+  end
 end

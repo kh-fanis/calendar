@@ -1,0 +1,15 @@
+<%= form_for @message do |f| %>
+  <%= hidden_field_tag 'message[reciver_id]', params[:reciver] %>
+  <p>Reciver: <%= User.find(params[:reciver]).full_name %></p>
+  <p>Content:</p>
+  <%= f.text_area :content, class: 'form-control' %>
+  <br>
+  <div class="row">
+    <div class="col-sm-6">
+      <%= link_to :Back, :back, class: 'btn' %>
+    </div>
+    <div class="col-sm-6 text-right">
+      <%= submit_tag :Send, class: 'btn' %>
+    </div>
+  </div>
+<% end %>

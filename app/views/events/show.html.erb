@@ -1,6 +1,7 @@
 <h1 class="text-center"><%= @event.name %></h1>
-<p class="text-center text-muted"><small><%= @event.user.email %></small></p>
+<p class="text-center text-muted"><small>Author: <%= @event.user.full_name %></small></p>
 <p class="text-center text-muted"><%= @event.date %></p>
+<p class="text-center text-muted"><small><%= EventService.repeating(@event.occurance) %> Repeating Event</small></p>
 
 <p><%= @event.description %></p>
 

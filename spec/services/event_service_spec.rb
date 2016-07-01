@@ -1,7 +1,7 @@
 describe EventService do
   before :all do
     User.destroy_all
-    User.create(email: 'k@k.kk', password: 'kkkkkkkk')
+    User.create(email: 'k@k.kk', password: 'kkkkkkkk', full_name: 'Denisov Denis')
   end
 
   context '.parse_date' do

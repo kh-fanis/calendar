@@ -12,12 +12,12 @@ RSpec.describe EventsController, type: :controller do
   let(:date_out_style) { '%Y-%m'    }
 
   before :all do
-    @user1 = User.create email: 'k@k.kk', password: 'kkkkkkkk'
-    @user2 = User.create email: 'j@j.jj', password: 'jjjjjjjj'
+    @user1 = User.create email: 'k@k.kk', password: 'kkkkkkkk', full_name: 'Danis Danisov'
+    @user2 = User.create email: 'j@j.jj', password: 'jjjjjjjj', full_name: 'Danil Danilov'
 
-    @event1 = Event.create name: :hello,        user: @user1, date: Date.today
-    @event2 = Event.create name: 'go to store', user: @user2, date: Date.today
-    @event3 = Event.create name: 'tamtamtam',   user: @user2, date: 1.month.ago
+    @event1 = Event.create name: :hello,        user: @user1, date: Date.today,  occurance: :d
+    @event2 = Event.create name: 'go to store', user: @user2, date: Date.today,  occurance: :w
+    @event3 = Event.create name: 'tamtamtam',   user: @user2, date: 1.month.ago, occurance: :d
   end
 
   describe "GET #index" do
@@ -29,37 +29,6 @@ RSpec.describe EventsController, type: :controller do
     it 'should render "usual" template' do
       get :index, usual: true
       expect(response).to render_template :usual
-    end
-
-    it 'should contain events' do
-      get :index
-      expect(response.body).to match /#{@event1.name}/
-      expect(response.body).to match /#{@event2.name}/
-    end
-
-    it 'should render events just of first user' do
-      sign_in @user1
-      get :index, mine: true
-      expect(response.body).to     match /#{@event1.name}/
-      expect(response.body).not_to match /#{@event2.name}/
-    end
-
-    context 'testing date in params' do
-      it 'should not contain event not being in this date in calendar' do
-        get :index
-        expect(response.body).not_to match /#{@event3.name}/
-      end
-
-      it 'should contain event not being in this date in calendar' do
-        get :index, date: @event3.date.strftime(date_out_style)
-        expect(response.body).to match /#{@event3.name}/
-      end
-
-      it 'should contain name of month and year in page' do
-        get :index, date: @event3.date.strftime(date_out_style)
-        expect(response.body).to match /#{Date::MONTHNAMES[@event3.date.month]}/i
-        expect(response.body).to match /#{@event3.date.year}/
-      end
     end
   end
 
@@ -99,7 +68,7 @@ RSpec.describe EventsController, type: :controller do
     it 'should successfully update event information' do
       sign_in @user1
       count = Event.count
-      post :create, event: { name: :creation_test, date: Date.today.strftime(date_in_style) }
+      post :create, event: { name: :creation_test, date: Date.today.strftime(date_in_style), occurance: :d }
       # Checking count increased
       expect(Event.count).to eql(count + 1)
       expect(response).to redirect_to Event.find_by_name(:creation_test)

@@ -1,0 +1,30 @@
+<% if @messages.empty? %>
+  <p>You have no messages for now</p>
+<% else %>
+  <div class="row">
+    <% @messages.each do |message| %>
+      <% if (message.sender == current_user and not message.deleted_by_sender) or (message.reciver == current_user and not message.deleted_by_reciver) %>
+
+        <div class="col-md-4">
+          <% if not message.sender == current_user and message.created_at > current_user.last_seen_messages %>
+            <p class="text-danger">!!! Unread Nessage</p>
+          <% end %>
+
+          <p><%= link_to 'Delete Message', message, method: :delete %></p>
+          <p>From:    <%= "#{message.sender.full_name}  - #{message.sender.email}" %></p>
+          <p>To:      <%= "#{message.reciver.full_name} - #{message.reciver.email}" %></p>
+          <p>Sent:    <%= message.created_at.to_formatted_s(:short) %></p>
+          <p>Message: <%= content_tag :span, message.content, class: 'text-info' %></p>
+
+          <% if not message.sender == current_user %>
+            <%= link_to 'Answer', new_message_path(reciver: message.sender.id) %>
+          <% end %>
+
+          <br>
+          <br>
+
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+<% end %>
